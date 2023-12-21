@@ -14,6 +14,9 @@ import org.json.JSONObject;
 
 import java.io.File;
 
+/**
+ * My fork test
+ */
 @CapacitorPlugin(name = "FileOpener")
 public class FileOpenerPlugin extends Plugin {
 
@@ -36,11 +39,11 @@ public class FileOpenerPlugin extends Plugin {
                 if (contentType == null || contentType.trim().equals("")) {
                     contentType = getMimeType(fileName);
                 }
-                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Intent intent = new Intent(Intent.ACTION_EDIT);
                 Context context = getActivity().getApplicationContext();
                 Uri path = FileProvider.getUriForFile(context, getActivity().getPackageName() + ".file.opener.provider", file);
                 intent.setDataAndType(path, contentType);
-                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 
                 if (openWithDefault) {
                     getActivity().startActivity(intent);
